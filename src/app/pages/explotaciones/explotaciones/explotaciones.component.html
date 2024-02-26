@@ -1,1 +1,10 @@
 <p>explotaciones works!</p>
+
+<ul>
+    <li *ngFor="let explotacion of explotaciones; let i = index">
+        {{ i }}: {{ explotacion.id }} - {{explotacion.nombre}}
+    </li>
+</ul>
+<div class="container-lg" >
+ 
+</div>

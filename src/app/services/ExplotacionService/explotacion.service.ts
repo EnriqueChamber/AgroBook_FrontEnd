@@ -9,18 +9,15 @@ export class ExplotacionService {
 
   constructor(private dataService : DataService) { }
 
-  getAll() : Explotacion[]{
-    var explotaciones : Explotacion[] = [];
-    this.dataService.get('explotaciones').subscribe(
-      (data) => {
-        console.log('Datos obtenidos:', data);
-        explotaciones = data;
+  getAll(explotaciones:Explotacion[] | undefined){
+    this.dataService.get('explotaciones').subscribe({
+      next: (v) => {
+        console.log('Datos obtenidos:', v);
+        explotaciones = v;
       },
-      (error) => {
-        console.error('Error al obtener datos:', error);
-      }
-    );
-    return explotaciones;
+      error: (e) => console.error('Error al obtener datos:', e),
+      complete: () => console.info('complete') 
+    });
   }
 
   
