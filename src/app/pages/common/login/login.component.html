@@ -1,1 +1,17 @@
 <p>login works!</p>
+
+
+<form [formGroup]="loginForm"  (ngSubmit)="onSubmit()" class="container">
+
+  <label for="username">First Name: </label>
+  <input id="username" type="text" formControlName="username">
+
+  <label for="password">Last Name: </label>
+  <input id="password" type="password" formControlName="password">
+
+  <button class="btn btn-outline-success" type="submit" [disabled]="!loginForm.valid" >Login</button>
+</form>
+
+
+<p>Form Status: {{ loginForm.status }}</p>
+<p>Form Status: {{ user }}</p>
