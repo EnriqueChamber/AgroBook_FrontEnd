@@ -7,7 +7,9 @@ import { HttpHeaders } from '@angular/common/http';
 
 const apiUrl : string = "http://localhost:5050/api";
 
-localStorage.setItem('ACCESS_USER', 'user');
+
+const ACCESS_USER = 'user';
+const ACCESS_PASS = 'pass';
 
 
 @Injectable({
@@ -16,48 +18,59 @@ localStorage.setItem('ACCESS_USER', 'user');
 export class DataService {
 
 
-  HEADERS_OPTIONS = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'Basic ' + btoa('user:password')
-    })
-  };
+  private static getHeadersOptions(){
+    return {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Basic ' + btoa(sessionStorage.getItem(ACCESS_USER)+':'+sessionStorage.getItem(ACCESS_PASS))
+      })
+    };
+  }
 
   constructor(private httpClient : HttpClient) { }
 
 
   
-  public setUserPassword(access_user: string, refresh_password: string): void {
-    localStorage.removeItem('ACCESS_USER');
-    localStorage.setItem('ACCESS_USER', access_user);
-    
-    this.HEADERS_OPTIONS = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'Basic ' + btoa(access_user + ':' + refresh_password)
-      })
-    };
+  public static setUserPassword(access_user: string, access_pass: string): void {
+    sessionStorage .removeItem(ACCESS_USER);
+    sessionStorage .setItem(ACCESS_USER, access_user);
+    sessionStorage .removeItem(ACCESS_PASS);
+    sessionStorage .setItem(ACCESS_PASS, access_pass);
+  }
+
+  public static logOut() : void{
+    sessionStorage .removeItem(ACCESS_USER);
+    sessionStorage .setItem(ACCESS_USER, 'user');
+    sessionStorage .removeItem(ACCESS_PASS);
+    sessionStorage .setItem(ACCESS_PASS, 'pass');
+  }
+
+  public static getLoggedUser() : string{
+    return sessionStorage.getItem(ACCESS_USER)!;
+  }
+  public static isLoggedIn() : boolean{
+    return sessionStorage.getItem(ACCESS_USER) != 'user' && sessionStorage.getItem(ACCESS_USER) != null;
   }
 
 
 
   get(endpoint: string): Observable<any> {
     const url = `${apiUrl}/${endpoint}`;
-    return this.httpClient.get(url, this.HEADERS_OPTIONS);
+    return this.httpClient.get(url, DataService.getHeadersOptions());
   }
 
   post(endpoint: string, data: any): Observable<any> {
     const url = `${apiUrl}/${endpoint}`;
-    return this.httpClient.post(url, data, this.HEADERS_OPTIONS);
+    return this.httpClient.post(url, data, DataService.getHeadersOptions());
   }
 
   put(endpoint: string, data: any): Observable<any> {
     const url = `${apiUrl}/${endpoint}`;
-    return this.httpClient.put(url, data, this.HEADERS_OPTIONS);
+    return this.httpClient.put(url, data, DataService.getHeadersOptions());
   }
 
   delete(endpoint: string): Observable<any> {
     const url = `${apiUrl}/${endpoint}`;
-    return this.httpClient.delete(url, this.HEADERS_OPTIONS);
+    return this.httpClient.delete(url, DataService.getHeadersOptions());
   }
 }

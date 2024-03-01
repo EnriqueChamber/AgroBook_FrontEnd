@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+// Light mode
+$primary-light: #a3e98b;
+$secondary-light: #10a392;
+$success-light: #07c975;
+$light-light: #e0f3f1;
+
+
+$theme-colors: (
+  "primary": $primary-light,
+  "secondary": $secondary-light,
+  "success": $success-light,
+  "light": $light-light
+);
+
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+

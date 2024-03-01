@@ -1,10 +1,9 @@
-<p>explotaciones works!</p>
-
-<ul>
-    <li *ngFor="let explotacion of explotaciones; let i = index">
-        {{ i }}: {{ explotacion.id }} - {{explotacion.nombre}}
-    </li>
-</ul>
-<div class="container-lg" >
- 
+<div class="row">
+    <div class="col-6 d-none d-sm-block">
+        <app-explotacion-button *ngFor="let explotacion of explotaciones; let i = index" [explotacion]="explotacion"></app-explotacion-button>
+    </div>
+    <div class="col-12 col-sm-6">
+        <img class="img-fluid" src="assets\images\mapa.jpg">
+    </div>
 </div>
+

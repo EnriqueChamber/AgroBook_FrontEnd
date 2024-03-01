@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NameEditorComponent } from "../../../components/forms/controls/name-editor/name-editor.component";
 import { DataService } from '../../../services/DataService/data.service';
-import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Usuario } from '../../../model/usuario/usuario';
 
@@ -10,29 +10,35 @@ import { Usuario } from '../../../model/usuario/usuario';
     standalone: true,
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
-    imports: [NameEditorComponent, ReactiveFormsModule, CommonModule]
+    imports: [NameEditorComponent, ReactiveFormsModule, CommonModule, FormsModule]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   
   loginForm = this.formBuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
   });
 
-  user = localStorage.getItem('ACCESS_USER')
-
-
+  
+  mostrarContrasena = false;
   constructor(private dataService: DataService, private formBuilder: FormBuilder) {
     
+  }
+
+
+  ngOnInit(): void {
+    /*if(DataService.isLoggedIn()){
+      location.href = '/'
+    }*/
   }
   
   onSubmit() {
     var username = this.loginForm.get('username')?.getRawValue() as string
     var password = this.loginForm.get('password')?.getRawValue() as string
 
-    this.dataService.setUserPassword(username, password);
+    DataService.setUserPassword(username, password);
 
-    var errorFunc = () => {this.dataService.setUserPassword('user', 'password')};
+    var errorFunc = () => {DataService.setUserPassword('user', 'password')};
 
     this.dataService.get('login').subscribe({
       next(value) {
@@ -50,10 +56,6 @@ export class LoginComponent {
         console.log('completed')
       }
     })
-  }
-
-  async setUserPassword(user: string, password: string){
-    this.dataService.setUserPassword(user, password)
   }
 
 }

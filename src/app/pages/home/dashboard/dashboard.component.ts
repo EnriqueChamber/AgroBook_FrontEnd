@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/AuthService/auth.service';
 import { DataService } from '../../../services/DataService/data.service';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 
 
@@ -19,12 +19,11 @@ export class DashboardComponent implements OnInit{
   //constructor(private authService: AuthService
 
   constructor(private dataService: DataService){
-    
+
   }
+
   ngOnInit(): void {
-    if(localStorage.getItem('ACCESS_USER') == "user"){
-      location.href = '/login'
-    }
+    location.href = '/explotaciones'
   }
 
 }
