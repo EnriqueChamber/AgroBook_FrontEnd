@@ -1,4 +1,4 @@
-<a class="card m-4" href="/explotaciones/{{explotacion.id}}" style="text-decoration: none;">
+<a class="card m-4" href="/parcelas/{{parcela.id}}" style="text-decoration: none;">
     <div class="container-md card-body">
         <div class="row">
 
@@ -9,25 +9,25 @@
             <div class="col-9">
                 <div class="row">
 
-                    <h3 class="col">{{ explotacion.nombre }}</h3>
+                    <h3 class="col">{{ parcela.nombre }}</h3>
 
                 </div>
 
                 
                 <div class="row">
-                    <p>{{ explotacion.parcelas.length}} parcelas</p>
+                    <p> aplicaciones realizadas p.ej.</p>
 
                 </div>
                 
                 <div class="row">
                     <div class="col">
-                        <h5>{{ explotacion.provincia }}</h5>
+                        <h5>{{ parcela.referenciaCatastral }}</h5>
                     </div>
                     <div class="col">
-                        <h6>{{ explotacion.localidad }}</h6>
+                        <h6>{{ parcela.coeficienteRegadio }}</h6>
                     </div>
                     <div class="col">
-                        <p>{{ explotacion.direccion }}</p>
+                        <p>{{ parcela.superficie }}</p>
                     </div>
 
                     

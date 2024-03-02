@@ -1,1 +1,9 @@
 <p>explotacion works!</p>
+<div class="row">
+    <div class="col-6 d-none d-sm-block">
+        <app-parcela-button *ngFor="let parcela of explotacion!.parcelas; let i = index" [parcela]="parcela"></app-parcela-button>
+    </div>
+    <div class="col-12 col-sm-6">
+        <img class="img-fluid" src="assets\images\mapa.jpg">
+    </div>
+</div>

@@ -23,11 +23,6 @@ export class ExplotacionesComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    /*if(!DataService.isLoggedIn()){
-      location.href = '/login'
-    }*/
-
-
     this.service.get('explotaciones').subscribe({
       next: (v) => {
         console.log('Datos obtenidos:', v);

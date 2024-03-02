@@ -1,16 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 // Light mode
-$primary-light: #a3e98b;
-$secondary-light: #10a392;
-$success-light: #07c975;
-$light-light: #e0f3f1;
+$primary:     #a3e98b !default;
+$secondary:   #10a392 !default;
+$success:     #07c975 !default;
+$info:        #0dcaf0 !default;
+$warning:     #ffc107 !default;
+$danger:      #dc3545 !default;
+$light:       #e0f3f1 !default;
+$dark:        #212529 !default;
 
 
 $theme-colors: (
-  "primary": $primary-light,
-  "secondary": $secondary-light,
-  "success": $success-light,
-  "light": $light-light
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
 );
 
 
